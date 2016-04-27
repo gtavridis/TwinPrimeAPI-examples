@@ -64,7 +64,7 @@ module.exports = {
   },
   
   //https://developer.geckoboard.com/#bar-chart
-  appDetailsToBarFormat: function(requestData, titleProp, callback) {
+  appDetailsToBarFormat: function(requestData, titleProp, valueProp, callback) {
     var result;
     
     result = {
@@ -84,7 +84,39 @@ module.exports = {
     if (!_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
       requestData.data.forEach(function(v) {
         result.x_axis.labels[result.x_axis.labels.length] = v[titleProp];
-        result.series[0].data[result.series[0].data.length] = v.total_request_count;
+        result.series[0].data[result.series[0].data.length] = v[valueProp];
+      });
+    }
+    
+    callback(result);
+  },
+  
+  //https://developer.geckoboard.com/#datetime-example-14
+  appDetailsToDateLineFormat: function(requestData, chartName, dateProp, valueProp, callback) {
+    var result;
+    
+    result = {
+      "x_axis": {
+        "type": "datetime"
+      },
+      "series": [
+        {
+          "name": "Visitors per month",
+          "data": [],
+          "incomplete_from": ""
+        }
+      ]
+    };
+    
+    if (!_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
+      requestData.data.forEach(function(v) {
+        var dt,
+            formattedDate;
+        
+        dt = new Date(v[dateProp]);
+        formattedDate = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+
+        result.series[0].data[result.series[0].data.length] = [formattedDate, v[valueProp]];
       });
     }
     

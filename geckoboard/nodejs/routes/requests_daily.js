@@ -4,20 +4,19 @@ var config = require("config"),
 module.exports = function(app){
 
   //Fetch content type data and return in the required Geckoboard bar chart format
-  app.get("/content_types/bar", function (req, res) {
+  app.get("/requests/line", function (req, res) {
     var endpointUrl,
         endpointParams;
     
-    endpointUrl = "app/data/performance";
+    endpointUrl = "app/data/performance/breakdown";
     
     endpointParams = {
       app_guid: config.get('app_guid'),
-      reldate: "30day",
-      parent_content_type: "detail"
+      reldate: "30day"
     };
 
     twinprimeUtils.requestData(res, endpointUrl, endpointParams, function(requestData) {
-      twinprimeUtils.appDetailsToBarFormat(requestData, "parent_content_type", "total_request_count", function(result) {
+      twinprimeUtils.appDetailsToDateLineFormat(requestData, "Requests by Day", "rollup_date", "total_request_count", function(result) {
         res.json(result);
       });
     });

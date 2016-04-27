@@ -5,6 +5,18 @@ var _ = require("lodash"),
 var apiKey = config.get("apikey"),
     apiBaseUrl = config.get("api_base_url");
 
+//Geckoboard expects dates in the ISO 8601 format. Pad single digit
+//month and day values as needed.
+function padDate(number) {
+  var r = String(number);
+  
+  if (r.length === 1) {
+    r = '0' + r;
+  }
+  
+  return r;
+}
+
 /**
  * A collection of useful utility methods for working with AWS
  */
@@ -102,8 +114,7 @@ module.exports = {
       "series": [
         {
           "name": "Visitors per month",
-          "data": [],
-          "incomplete_from": ""
+          "data": []
         }
       ]
     };
@@ -114,7 +125,7 @@ module.exports = {
             formattedDate;
         
         dt = new Date(v[dateProp]);
-        formattedDate = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+        formattedDate = dt.getFullYear() + "-" + padDate(dt.getMonth() + 1) + "-" + padDate(dt.getDate());
 
         result.series[0].data[result.series[0].data.length] = [formattedDate, v[valueProp]];
       });

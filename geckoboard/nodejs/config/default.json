@@ -1,0 +1,6 @@
+{
+  "apikey": "YOUR-API-KEY",
+  "app_guid": "YOUR-APP-GUID",
+  "api_base_url": "https://web-api.twinprime.com/v1/",
+  "chart_colors": ["#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"]
+}

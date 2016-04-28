@@ -17,7 +17,7 @@ module.exports = function(app){
     };
 
     twinprimeUtils.requestData(res, endpointUrl, endpointParams, function(requestData) {
-      twinprimeUtils.appDetailsToPieFormat(requestData, "network", function(result) {
+      twinprimeUtils.appDetailsToPieFormat(requestData, "network", "total_request_count", function(result) {
         res.json(result);
       });
     });

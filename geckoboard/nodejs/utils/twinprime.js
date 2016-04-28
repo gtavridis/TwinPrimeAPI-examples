@@ -54,20 +54,17 @@ module.exports = {
   },
   
   //https://developer.geckoboard.com/#pie-chart
-  appDetailsToPieFormat: function(requestData, titleProp, callback) {
+  appDetailsToPieFormat: function(requestData, titleProp, valueProp, callback) {
     var i = 0,
-        result,
-        chartColors;
+        result;
     
-    chartColors = config.get('chart_colors');
     result = { item: [] };
     
     if (requestData && !_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
       requestData.data.forEach(function(v) {
         result.item[result.item.length] = {
           "label": v[titleProp],
-          "value": v.total_request_count,
-          "color": chartColors[i]
+          "value": v[valueProp]
         };
       });
     }
@@ -115,7 +112,7 @@ module.exports = {
       },
       "series": [
         {
-          "name": "Visitors per month",
+          "name": chartName,
           "data": []
         }
       ]

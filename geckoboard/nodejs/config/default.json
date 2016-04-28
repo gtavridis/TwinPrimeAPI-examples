@@ -1,5 +1,5 @@
 {
-  "apikey": "d1a949775dc9e9ea4165ddcad",
-  "app_guid": "12345678",
-  "api_base_url": "http://web-api.twinprime.dev/v1/"
+  "apikey": "YOUR-API-KEY",
+  "app_guid": "YOUR-APP-GUID",
+  "api_base_url": "https://web-api.twinprime.com/v1/"
 }

@@ -3,7 +3,7 @@ class Twinprime {
 	
   protected $config = null;
   
-	public function __construct() {
+  public function __construct() {
     $this->config = parse_ini_file("config/default.ini.php");
   }
 
@@ -56,7 +56,7 @@ class Twinprime {
 		
     $rData = json_decode($requestData);
     
-		if (isset($rData->data) && !empty($rData->data)) {
+    if (isset($rData->data) && !empty($rData->data)) {
       foreach($rData->data as $d) {
         $result["x_axis"]["labels"][] = $d->{$titleProp};
         $result["series"]["data"][] = $d->{$valueProp};
@@ -74,7 +74,7 @@ class Twinprime {
 		
     $rData = json_decode($requestData);
     
-		if (isset($rData->data) && !empty($rData->data)) {
+    if (isset($rData->data) && !empty($rData->data)) {
       foreach($rData->data as $d) {
         $result["item"][] = array(
           "label" => $d->{$titleProp},
@@ -101,9 +101,9 @@ class Twinprime {
 		
     $rData = json_decode($requestData);
     
-		date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('America/Los_Angeles');
     
-		if (isset($rData->data) && !empty($rData->data)) {
+    if (isset($rData->data) && !empty($rData->data)) {
       foreach($rData->data as $d) {
         $formattedDate = date("Y-m-d", strtotime($d->{$dateProp}));
         $result["series"]["data"][] = array(
@@ -130,7 +130,7 @@ class Twinprime {
 		
     $rData = json_decode($requestData);
     
-		if (isset($rData->data) && !empty($rData->data)) {
+    if (isset($rData->data) && !empty($rData->data)) {
       //Sum it
       $summedValue = 0;
       foreach($rData->data as $d) {

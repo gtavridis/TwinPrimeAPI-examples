@@ -17,7 +17,7 @@ module.exports = function(app){
     };
 
     twinprimeUtils.requestData(res, endpointUrl, endpointParams, function(requestData) {
-      twinprimeUtils.appDetailsToBarFormat(requestData, "parent_content_type", "total_request_count", function(result) {
+      twinprimeUtils.appDetailsToBarFormat(requestData, "parent_content_type", "acc_median_origin_latency", function(result) {
         res.json(result);
       });
     });

@@ -94,6 +94,8 @@ module.exports = {
     };
     
     if (!_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
+      requestData.data = _.orderBy(requestData.data, valueProp, "desc");
+      
       requestData.data.forEach(function(v) {
         result.x_axis.labels[result.x_axis.labels.length] = v[titleProp];
         result.series[0].data[result.series[0].data.length] = v[valueProp];
@@ -145,6 +147,32 @@ module.exports = {
     if (!_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
       result.item[0].text = title;
       result.item[0].value = _.sumBy(requestData.data, valueProp);
+    }
+    
+    callback(result);
+  },
+  
+  //https://developer.geckoboard.com/#map
+  appDetailsToMapFormat: function(requestData, geos, callback) {
+    var result;
+    
+    result = {
+      "points": {
+        "point": []
+      }
+    };
+    
+    if (!_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
+      requestData.data.forEach(function(v) {              
+        var tzMatch = geos[v.timezone];
+    
+        result.points.point[result.points.point.length] = {
+          "latitude": tzMatch.latitude,
+          "longitude": tzMatch.longitude,
+          "color": "ff0000",
+          "size": 5
+        };
+      });
     }
     
     callback(result);

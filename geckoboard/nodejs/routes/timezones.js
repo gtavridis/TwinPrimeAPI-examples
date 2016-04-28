@@ -16,41 +16,31 @@ module.exports = function(app){
   app.get("/timezones/map", function (req, res) {
     //Grab geo data so that we can lookup proper lat/long values
     getGeos(res, function(geos) {
-      var result,
-          endpointUrl,
+      var endpointUrl,
           endpointParams;
   
       endpointUrl = "app/data/performance";
       
+      //Image only traffic broken down by timezone
       endpointParams = {
         app_guid: config.get('app_guid'),
         reldate: "30day",
         country_code: "all",
-        timezone: "detail"
-      };
-
-      result = {
-        "points": {
-          "point": []
-        }
+        timezone: "detail",
+        parent_content_type: "Image"
       };
   
       twinprimeUtils.requestData(res, endpointUrl, endpointParams, function(requestData) {
         if (!_.isUndefined(requestData.data) && !_.isEmpty(requestData.data)) {
-          requestData.data.forEach(function(v) {              
-            var tzMatch = geos[v.timezone];
-        
-            result.points.point[result.points.point.length] = {
-              "latitude": tzMatch.latitude,
-              "longitude": tzMatch.longitude,
-              "size": 5
-            };
+          //We only want to plot bad performance on the map so look for high DCU
+          requestData.data = _.filter(requestData.data, function(r) {
+            return r.acc_median_dcu > 1000;
           });
-      
-          res.json(result);
-        } else {
-          res.json(result);
         }
+        
+        twinprimeUtils.appDetailsToMapFormat(requestData, geos, function(result) {
+          res.json(result);
+        });
       });
     });
   });

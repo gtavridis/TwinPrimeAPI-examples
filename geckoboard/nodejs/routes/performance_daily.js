@@ -4,7 +4,7 @@ var config = require("config"),
 module.exports = function(app){
 
   //Fetch content type data and return in the required Geckoboard bar chart format
-  app.get("/requests/line", function (req, res) {
+  app.get("/performance/line", function (req, res) {
     var endpointUrl,
         endpointParams;
     
@@ -16,7 +16,7 @@ module.exports = function(app){
     };
 
     twinprimeUtils.requestData(res, endpointUrl, endpointParams, function(requestData) {
-      twinprimeUtils.appDetailsToDateLineFormat(requestData, "Requests by Day", "rollup_date", "total_request_count", function(result) {
+      twinprimeUtils.appDetailsToDateLineFormat(requestData, "Performance by Day", "rollup_date", "acc_median_dcu", function(result) {
         res.json(result);
       });
     });

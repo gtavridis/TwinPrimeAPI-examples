@@ -4,13 +4,13 @@
 	<img height="40" src="http://twinprime.com/wp-content/themes/root/build/images/svgs/twinprime-logo.svg" alt="Twin Prime logo">
 </a>
 
-[Twin Prime](http://twinprime.com/) offers a rich customer facing [dashboard](https://dashboard.twinprime.com) that provides access to important performance and traffic related information. We realize thought that some customers might prefer to integrate Twin Prime's performance data into other applications/dashboards already in use.  For this reason we also offer a web API to our customers.  The official API docs can be found [here](https://web-api.twinprime.com/docs/).
+[Twin Prime](http://twinprime.com/) API offers programmatic access to the rich client and network data collected by Twin Prime. Using the Twin Prime API, you can now pull data and metrics about your users' performance and usage into your own custom dashboards. 
 
-To go along with the API docs we have developed a set of sample integrations for [Geckoboard](https://www.geckoboard.com/).  You are by no means limited to utilizing Geckoboard, it just happens to be a great platform for quickly assembling dashboards from a variety of popular and/or custom services.  Our sample integrations act as a proxy between the Twin Prime API and the [Geckoboard custom widget API](https://developer.geckoboard.com/#custom-widget-types).  The proxy samples enabled a series of endpoints that Geckoboard can call to retrieve JSON data in the format it expects for various widget types.
+To help you with the integration, we have created a few sample widgets in this repo. For the purposes of the samples, we are using Geckoboard. You are by no means limited to utilizing Geckoboard, it just happens to be a great platform for quickly assembling dashboards from a variety of popular and/or custom services.  Our sample integrations act as a proxy between the Twin Prime API and the [Geckoboard custom widget API](https://developer.geckoboard.com/#custom-widget-types).  The proxy samples enabled a series of endpoints that Geckoboard can call to retrieve JSON data in the format it expects for various widget types.
 
 We've provided open source samples written in JavaScript (Node.js) and PHP, but any language capable of making HTTP requests would work just fine.
 
-Screenshot of the sample dashboard:
+Here is a screenshot of the Twin Prime NOC dashboard:
 ![enter image description here](https://www.evernote.com/l/ADHnQSkTWudLEoTnqVIJGBFD9nukjnYyB2oB/image.png)
 
 For more information please see the following [blog post](http://twinprime.com/category/blog/).

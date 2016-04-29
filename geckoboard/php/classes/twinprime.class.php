@@ -50,7 +50,7 @@ class Twinprime {
         "format" => "decimal"
       ) ,
       "series" => array(
-        "data" => array()
+        array("data" => array())
       )
     );
 		
@@ -59,7 +59,7 @@ class Twinprime {
     if (isset($rData->data) && !empty($rData->data)) {
       foreach($rData->data as $d) {
         $result["x_axis"]["labels"][] = $d->{$titleProp};
-        $result["series"]["data"][] = $d->{$valueProp};
+        $result["series"][0]["data"][] = $d->{$valueProp};
       }
     }
 
@@ -94,9 +94,11 @@ class Twinprime {
         "type" => "datetime"
       ) ,
       "series" => array(
-        "name" => $chartName,
-        "data" => array()
-      )
+				array(
+        	"name" => $chartName,
+        	"data" => array()
+      	)
+			)
     );
 		
     $rData = json_decode($requestData);
@@ -106,10 +108,9 @@ class Twinprime {
     if (isset($rData->data) && !empty($rData->data)) {
       foreach($rData->data as $d) {
         $formattedDate = date("Y-m-d", strtotime($d->{$dateProp}));
-        $result["series"]["data"][] = array(
+        $result["series"][0]["data"][] = array(
           $formattedDate,
           $d->{$valueProp}
-
         );
       }
     }
